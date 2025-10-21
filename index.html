@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwiftWay Logistics | Global Shipping Solutions</title>
+    <link rel="stylesheet" href="assets\fontsawesome\css\all.min.css">
+    <link rel="stylesheet" href="assets/leaflet/leaflet.css" />
+    <link href="assets/aos/style.css" rel="stylesheet">
+    <script src="assets\aos\aos.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css" />
+
+</head>
+<body>
+ 
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <h1>Swift<span>Way</span></h1>
+            </div>
+            <nav>
+                <ul id="mainMenu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#tariffs">Tariffs</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contacts">Contacts</a></li>
+                    <li><a href="#careers">Careers</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <div class="city-selector">
+                    <button class="city-selector-btn">
+                        <i class="fas fa-map-marker-alt"></i> New York
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="city-dropdown">
+                        <input type="text" class="city-search" placeholder="Search city...">
+                        <div class="city-list">
+                            <div class="country-group">
+                                <div class="country-title">United States</div>
+                                <div class="city-item">New York</div>
+                                <div class="city-item">Chicago</div>
+                                <div class="city-item">Los Angeles</div>
+                                <div class="city-item">Miami</div>
+                                <div class="city-item">Houston</div>
+                            </div>
+                            <div class="country-group">
+                                <div class="country-title">Germany</div>
+                                <div class="city-item">Frankfurt</div>
+                                <div class="city-item">Berlin</div>
+                                <div class="city-item">Munich</div>
+                                <div class="city-item">Hamburg</div>
+                                <div class="city-item">Cologne</div>
+                            </div>
+                            <div class="country-group">
+                                <div class="country-title">France</div>
+                                <div class="city-item">Paris</div>
+                                <div class="city-item">Marseille</div>
+                                <div class="city-item">Lyon</div>
+                                <div class="city-item">Toulouse</div>
+                                <div class="city-item">Nice</div>
+                            </div>
+                            <div class="country-group">
+                                <div class="country-title">United Kingdom</div>
+                                <div class="city-item">London</div>
+                                <div class="city-item">Manchester</div>
+                                <div class="city-item">Birmingham</div>
+                                <div class="city-item">Liverpool</div>
+                                <div class="city-item">Glasgow</div>
+                            </div>
+                            <div class="country-group">
+                                <div class="country-title">Sweden</div>
+                                <div class="city-item">Stockholm</div>
+                                <div class="city-item">Gothenburg</div>
+                                <div class="city-item">Malmö</div>
+                                <div class="city-item">Uppsala</div>
+                                <div class="city-item">Västerås</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-outline" id="callbackBtn">Order Callback</button>
+            </div>
+            
+            <div class="mobile-actions">
+            
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home" data-aos="fade-in">
+        <div class="container">
+            <h2 data-aos="fade-up" data-aos-delay="100">Global Logistics Solutions</h2>
+            <p data-aos="fade-up" data-aos-delay="200">Fast, reliable, and secure shipping services across Europe and North America</p>
+            
+            <div class="calculator-container" data-aos="fade-up" data-aos-delay="400">
+                <h3 class="calculator-title">Calculate Shipping Cost</h3>
+                <form class="calculator-form">
+                    <div class="form-group">
+                        <label for="from-country">Origin Country</label>
+                        <select id="from-country">
+                            <option value="">Select Country</option>
+                            <option value="usa">United States</option>
+                            <option value="germany">Germany</option>
+                            <option value="france">France</option>
+                            <option value="uk">United Kingdom</option>
+                            <option value="sweden">Sweden</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="from-city">Origin City</label>
+                        <select id="from-city" disabled>
+                            <option value="">Select City</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="to-country">Destination Country</label>
+                        <select id="to-country">
+                            <option value="">Select Country</option>
+                            <option value="usa">United States</option>
+                            <option value="germany">Germany</option>
+                            <option value="france">France</option>
+                            <option value="uk">United Kingdom</option>
+                            <option value="sweden">Sweden</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="to-city">Destination City</label>
+                        <select id="to-city" disabled>
+                            <option value="">Select City</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cargo-type">Cargo Type</label>
+                        <select id="cargo-type">
+                            <option value="documents">Documents (up to 2kg)</option>
+                            <option value="parcel">Parcel (up to 30kg)</option>
+                            <option value="pallet">Pallet (up to 1000kg)</option>
+                            <option value="fragile">Fragile Items</option>
+                            <div class="city-item">Oversized Cargo</div>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="weight">Weight (kg)</label>
+                        <input type="number" id="weight" min="0.1" step="0.1" placeholder="Enter weight">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dimensions">Dimensions (cm)</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="number" placeholder="L" style="flex: 1;">
+                            <input type="number" placeholder="W" style="flex: 1;">
+                            <input type="number" placeholder="H" style="flex: 1;">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label>Additional Services</label>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="insurance">
+                            <label for="insurance">Cargo Insurance (+1.5%)</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="packaging">
+                            <label for="packaging">Professional Packaging (+$15)</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="door-delivery">
+                            <label for="door-delivery">Door-to-Door Delivery (+$45)</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <button type="button" class="btn btn-primary" style="width: 100%;" id="calculateBtn">Calculate Cost</button>
+                    </div>
+                    
+                    <div class="calculate-result" id="resultContainer">
+                        <div class="result-row">
+                            <span>Base Cost:</span>
+                            <span id="baseCost">$0.00</span>
+                        </div>
+                        <div class="result-row">
+                            <span>Additional Services:</span>
+                            <span id="additionalCost">$0.00</span>
+                        </div>
+                        <div class="result-row">
+                            <span>Estimated Delivery:</span>
+                            <span id="deliveryTime">3-5 days</span>
+                        </div>
+                        <div class="result-row" style="margin-top: 15px;">
+                            <strong>Total Cost:</strong>
+                            <span class="result-price" id="totalCost">$0.00</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-aos="fade-up">About SwiftWay Logistics</h2>
+                <p data-aos="fade-up" data-aos-delay="100">Your trusted partner in global shipping</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text" data-aos="fade-right" data-aos-delay="200">
+                    <h3>Connecting Continents Since 2015</h3>
+                    <p>Founded in Frankfurt, Germany, SwiftWay Logistics has grown from a regional carrier to a global shipping provider with offices across Europe and North America. Our mission is to simplify global trade through reliable, transparent, and efficient logistics solutions.</p>
+                    
+                    <p>At SwiftWay, we believe in building partnerships rather than just providing services. Our core values—reliability, innovation, and customer focus—drive every aspect of our operations. We've invested in state-of-the-art tracking systems and a modern fleet to ensure your shipments arrive on time and in perfect condition.</p>
+                    
+                    <div class="about-stats">
+                        <div class="stat-item" data-aos="zoom-in" data-aos-delay="300">
+                            <div class="stat-number">8+</div>
+                            <div class="stat-label">Years of Experience</div>
+                        </div>
+                        <div class="stat-item" data-aos="zoom-in" data-aos-delay="350">
+                            <div class="stat-number">120k+</div>
+                            <div class="stat-label">Deliveries Completed</div>
+                        </div>
+                        <div class="stat-item" data-aos="zoom-in" data-aos-delay="400">
+                            <div class="stat-number">35+</div>
+                            <div class="stat-label">Countries Covered</div>
+                        </div>
+                        <div class="stat-item" data-aos="zoom-in" data-aos-delay="450">
+                            <div class="stat-number">200+</div>
+                            <div class="stat-label">Vehicles in Fleet</div>
+                        </div>
+                    </div>
+                    
+                    <p>Our commitment to excellence has earned us recognition as one of Europe's most reliable logistics providers, with a 98.7% on-time delivery rate and customer satisfaction scores consistently above 9.5/10.</p>
+                    
+                    <div class="guarantee-card" data-aos="fade-up" data-aos-delay="500">
+                        <h4><i class="fas fa-shield-alt"></i> Our Guarantee</h4>
+                        <ul>
+                            <li><strong>Full Cargo Insurance:</strong> Automatic coverage up to $100,000 for all shipments</li>
+                            <li><strong>Financial Responsibility:</strong> We cover 100% of declared value for lost or damaged goods</li>
+                            <li><strong>Transparent Claims Process:</strong> Resolve any issues within 72 hours</li>
+                            <li><strong>Money-Back Guarantee:</strong> For shipments delayed more than 5 days beyond estimate</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="about-image" data-aos="fade-left" data-aos-delay="200">
+                    <img src="assets/img/photo-1504384308090-c894fdcc538d.avif" alt="SwiftWay Logistics Global Network">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tariffs Section -->
+    <section id="tariffs" style="background-color: #f0f7ff;">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-aos="fade-up">Shipping Tariffs</h2>
+                <p data-aos="fade-up" data-aos-delay="100">Competitive pricing for all your shipping needs</p>
+            </div>
+            
+            <div class="tariffs-container" data-aos="fade-up" data-aos-delay="200">
+                <h3 style="margin-bottom: 25px;">Standard Rates for Popular Routes</h3>
+                
+                <table class="tariff-table">
+                    <thead>
+                        <tr>
+                            <th>Route</th>
+                            <th>Cargo Type</th>
+                            <th>Max Weight</th>
+                            <th>Base Price</th>
+                            <th>Est. Delivery</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Frankfurt → New York</td>
+                            <td>Pallet</td>
+                            <td>1000 kg</td>
+                            <td class="tariff-price">$550</td>
+                            <td>4-6 days</td>
+                        </tr>
+                        <tr>
+                            <td>Berlin → Chicago</td>
+                            <td>Parcel</td>
+                            <td>30 kg</td>
+                            <td class="tariff-price">$120</td>
+                            <td>5-7 days</td>
+                        </tr>
+                        <tr>
+                            <td>Paris → Los Angeles</td>
+                            <td>Documents</td>
+                            <td>2 kg</td>
+                            <td class="tariff-price">$35</td>
+                            <td>3-5 days</td>
+                        </tr>
+                        <tr>
+                            <td>London → Miami</td>
+                            <td>Parcel</td>
+                            <td>30 kg</td>
+                            <td class="tariff-price">$130</td>
+                            <td>6-8 days</td>
+                        </tr>
+                        <tr>
+                            <td>Stockholm → Toronto</td>
+                            <td>Pallet</td>
+                            <td>1000 kg</td>
+                            <td class="tariff-price">$580</td>
+                            <td>7-9 days</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="text-center" style="margin: 30px 0;">
+                    <a href="#home" class="btn btn-outline">Use Calculator for Exact Price</a>
+                </div>
+                
+                <div class="requirements">
+                    <h3 data-aos="fade-up">Cargo Requirements & Packaging</h3>
+                    
+                    <div class="requirements-grid">
+                        <div class="requirement-card" data-aos="fade-right" data-aos-delay="100">
+                            <h4><i class="fas fa-ban"></i> Prohibited Items</h4>
+                            <ul>
+                                <li>Weapons and ammunition</li>
+                                <li>Flammable liquids and gases</li>
+                                <li>Perishable food items</li>
+                                <li>Illegal substances</li>
+                                <li>Live animals without special arrangement</li>
+                                <li>Precious metals and stones over $10,000 value</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="requirement-card" data-aos="fade-left" data-aos-delay="100">
+                            <h4><i class="fas fa-box"></i> Packaging Guidelines</h4>
+                            <ul>
+                                <li>Use double-walled cardboard boxes for fragile items</li>
+                                <li>Provide at least 5cm cushioning on all sides</li>
+                                <li>Secure items to prevent movement inside packages</li>
+                                <li>Use waterproof packaging for international shipments</li>
+                                <li>Palletize items over 50kg</li>
+                                <li>Maximum dimensions: 250cm x 200cm x 200cm</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="requirement-card" style="margin-top: 30px;" data-aos="fade-up" data-aos-delay="200">
+                        <h4><i class="fas fa-euro-sign"></i> Additional Services Pricing</h4>
+                        <ul>
+                            <li><strong>Cargo Insurance:</strong> 1.5% of declared value (minimum $10)</li>
+                            <li><strong>Professional Packaging:</strong> $15-$50 based on item size</li>
+                            <li><strong>Door-to-Door Delivery:</strong> $45-$90 based on location</li>
+                            <li><strong>Expedited Shipping:</strong> +40% of base price for 50% faster delivery</li>
+                            <li><strong>Storage Services:</strong> $15/day per pallet space</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Careers Section -->
+     <section class="careers-section" id="careers">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-aos="fade-up">Join Our Team</h2>
+                <p data-aos="fade-up" data-aos-delay="100">Build your career in logistics with SwiftWay</p>
+            </div>
+            
+            <div class="careers-container" data-aos="fade-up" data-aos-delay="200">
+                <form class="careers-form" id="careerForm" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="full-name">Full Name</label>
+                        <input type="text" id="full-name" placeholder="Enter your full name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="career-email">Email</label>
+                        <input type="email" id="career-email" placeholder="Enter your email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="career-phone">Phone</label>
+                        <input type="tel" id="career-phone" placeholder="Enter your phone number">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="career-country">Country</label>
+                        <select id="career-country">
+                            <option value="">Select Country</option>
+                            <option value="usa">United States</option>
+                            <option value="germany">Germany</option>
+                            <option value="france">France</option>
+                            <option value="uk">United Kingdom</option>
+                            <option value="sweden">Sweden</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="career-city">City</label>
+                        <select id="career-city" disabled>
+                            <option value="">Select City</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="position">Position Applying For</label>
+                        <select id="position">
+                            <option value="">Select Position</option>
+                            <option value="driver">Commercial Driver</option>
+                            <option value="logistics">Logistics Coordinator</option>
+                            <option value="warehouse">Warehouse Manager</option>
+                            <option value="customer">Customer Service</option>
+                            <option value="admin">Administrative Staff</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Upload Documents</label>
+                        
+                        <!-- Область для загрузки CV -->
+                        <div class="custom-upload-area" id="cv-upload-area">
+                            <i class="fas fa-file-upload"></i>
+                            <h4>Upload Your CV</h4>
+                            <p>PDF, JPG, or PNG (Max 5MB)</p>
+                            <input type="file" class="file-input" id="cv-input" accept=".pdf,.jpg,.png">
+                            <div class="file-info" id="cv-info">
+                                <i class="fas fa-file-pdf"></i> Selected file:
+                                <span class="file-name"></span>
+                                <span class="file-size"></span>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="custom-upload-area" id="id-upload-area">
+                            <i class="fas fa-id-card"></i>
+                            <h4>Upload Your ID</h4>
+                            <p>PDF, JPG, or PNG (Max 5MB)</p>
+                            <input type="file" class="file-input" id="id-input" accept=".pdf,.jpg,.png">
+                            <div class="file-info" id="id-info">
+                                <i class="fas fa-file-image"></i> Selected file:
+                                <span class="file-name"></span>
+                                <span class="file-size"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Cover Letter (Optional)</label>
+                        <textarea id="message" rows="4" placeholder="Tell us why you want to join our team"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Application</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- Contacts Section -->
+    <section id="contacts">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-aos="fade-up">Contact Us</h2>
+                <p data-aos="fade-up" data-aos-delay="100">Get in touch with our global offices</p>
+            </div>
+            
+            <div class="contacts-container">
+                <div class="contact-info" data-aos="fade-right" data-aos-delay="200">
+                    <h3>Our Offices</h3>
+                    
+                    <div class="office-list">
+                        <div class="office-item">
+                            <h4><i class="fas fa-map-marker-alt"></i> United States</h4>
+                            <p><i class="fas fa-location-dot"></i> 123 Logistics Blvd, New York, NY 10001</p>
+                            <p><i class="fas fa-phone"></i> +1 (212) 555-7890</p>
+                            <p><i class="fas fa-envelope"></i> usa@swiftwaylogistics.com</p>
+                        </div>
+                        
+                        <div class="office-item">
+                            <h4><i class="fas fa-map-marker-alt"></i> Germany</h4>
+                            <p><i class="fas fa-location-dot"></i> Hauptstraße 45, 60329 Frankfurt</p>
+                            <p><i class="fas fa-phone"></i> +49 69 555 7890</p>
+                            <p><i class="fas fa-envelope"></i> germany@swiftwaylogistics.com</p>
+                        </div>
+                        
+                        <div class="office-item">
+                            <h4><i class="fas fa-map-marker-alt"></i> France</h4>
+                            <p><i class="fas fa-location-dot"></i> Rue de Commerce 12, 75001 Paris</p>
+                            <p><i class="fas fa-phone"></i> +33 1 5555 7890</p>
+                            <p><i class="fas fa-envelope"></i> france@swiftwaylogistics.com</p>
+                        </div>
+                        
+                        <div class="office-item">
+                            <h4><i class="fas fa-map-marker-alt"></i> Sweden</h4>
+                            <p><i class="fas fa-location-dot"></i> Kungsgatan 8, 111 43 Stockholm</p>
+                            <p><i class="fas fa-phone"></i> +46 8 555 7890</p>
+                            <p><i class="fas fa-envelope"></i> sweden@swiftwaylogistics.com</p>
+                        </div>
+                        
+                        <div class="office-item">
+                            <h4><i class="fas fa-map-marker-alt"></i> United Kingdom</h4>
+                            <p><i class="fas fa-location-dot"></i> 5th Avenue 20, London W1J 6AQ</p>
+                            <p><i class="fas fa-phone"></i> +44 20 5555 7890</p>
+                            <p><i class="fas fa-envelope"></i> uk@swiftwaylogistics.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="office-item">
+                        <h4><i class="fas fa-globe-americas"></i> Service Coverage</h4>
+                        <p>We deliver to all EU countries, United Kingdom, United States, and Canada. Our regional hubs cover 100% of North America and Europe with reliable ground and air transportation solutions.</p>
+                    </div>
+                </div>
+                
+                <div class="map-container" data-aos="fade-left" data-aos-delay="200">
+                    <div id="map"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <div class="footer-logo">Swift<span>Way</span></div>
+                    <p>SwiftWay Logistics provides reliable and efficient shipping solutions between North America and Europe, with a commitment to excellence and customer satisfaction.</p>
+
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#tariffs">Tariffs</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                    </ul>
+                </div>                
+                <div class="footer-links">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +1 (800) 555-7890</li>
+                        <li><i class="fas fa-envelope"></i> info@swiftwaylogistics.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Global Headquarters: Frankfurt, Germany</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 SwiftWay Logistics. All rights reserved. 
+                    <a href="#" class="privacy-link" id="privacyLink">Privacy Policy</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Callback Modal -->
+    <div class="modal" id="callbackModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeCallback">&times;</span>
+            <h3 class="modal-title">Request a Callback</h3>
+            <form>
+                <div class="form-group">
+                    <input type="text" placeholder="Full Name*" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" placeholder="Phone Number*" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Email Address*" required>
+                </div>
+                <div class="form-group">
+                    <select>
+                        <option value="">Select Service</option>
+                        <option value="shipping">International Shipping</option>
+                        <option value="domestic">Domestic Delivery</option>
+                        <option value="warehousing">Warehousing</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Message" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Request Callback</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Privacy Policy Modal -->
+    <div class="modal" id="privacyModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closePrivacy">&times;</span>
+            <h3 class="modal-title">Privacy Policy</h3>
+            <div style="max-height: 500px; overflow-y: auto; padding-right: 10px;">
+                <h4>1. Introduction</h4>
+                <p>SwiftWay Logistics ("we", "us", or "our") is committed to protecting your personal information. This Privacy Policy explains how we collect, use, and disclose your personal data when you use our services.</p>
+                
+                <h4>2. Information We Collect</h4>
+                <p>We collect the following types of information:</p>
+                <ul>
+                    <li><strong>Personal Identification Information:</strong> Name, email address, phone number, shipping address</li>
+                    <li><strong>Shipping Information:</strong> Origin, destination, cargo details, tracking numbers</li>
+                    <li><strong>Payment Information:</strong> Billing address, payment method details (processed securely by our payment partners)</li>
+                    <li><strong>Technical Data:</strong> IP address, browser type, device information, usage patterns</li>
+                </ul>
+                
+                <h4>3. How We Use Your Information</h4>
+                <p>We use your personal information for the following purposes:</p>
+                <ul>
+                    <li>To process and fulfill your shipping requests</li>
+                    <li>To provide customer support and respond to inquiries</li>
+                    <li>To improve our services and website functionality</li>
+                    <li>To send service-related communications</li>
+                    <li>To comply with legal obligations and prevent fraud</li>
+                </ul>
+                
+                <h4>4. Data Sharing and Disclosure</h4>
+                <p>We do not sell your personal information to third parties. We may share your information with:</p>
+                <ul>
+                    <li>Service providers who assist with shipping, payment processing, and IT services</li>
+                    <li>Legal authorities when required by law or to protect our rights</li>
+                    <li>Business partners in connection with mergers, acquisitions, or asset sales</li>
+                </ul>
+                
+                <h4>5. Data Security</h4>
+                <p>We implement appropriate technical and organizational measures to protect your personal data against unauthorized access, alteration, or destruction.</p>
+                
+                <h4>6. Your Rights</h4>
+                <p>Depending on your location, you may have rights to:</p>
+                <ul>
+                    <li>Access your personal information</li>
+                    <li>Request correction of inaccurate data</li>
+                    <li>Request deletion of your data</li>
+                    <li>Object to certain processing activities</li>
+                    <li>Request data portability</li>
+                </ul>
+                
+                <h4>7. Cookies and Tracking Technologies</h4>
+                <p>We use cookies and similar technologies to enhance user experience, analyze site usage, and deliver targeted advertising. You can manage cookie preferences through your browser settings.</p>
+                
+                <h4>8. Changes to This Policy</h4>
+                <p>We may update this Privacy Policy periodically. The updated version will be indicated by a revised date at the bottom of this page.</p>
+                
+                <h4>9. Contact Us</h4>
+                <p>If you have questions about this Privacy Policy or our data practices, contact us at:</p>
+                <p>privacy@swiftwaylogistics.com</p>
+                <p>SwiftWay Logistics GmbH<br>Data Protection Officer<br>Hauptstraße 45, 60329 Frankfurt, Germany</p>
+                
+                <p><em>Last Updated: June 3, 2023</em></p>
+            </div>
+        </div>
+    </div>
+    <script src="assets/leaflet/leaflet.js"></script>
+    <script src="assets/aos/aos.js"></script>
+    <script src="assets/js/main.js" type="module"></script>
+</body>
+</html>
